@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'recipe-book';
+  navigateTo: string = 'recipes';
+
+  onPathReceived(path: string){
+    this.navigateTo = path;
+  }
 }

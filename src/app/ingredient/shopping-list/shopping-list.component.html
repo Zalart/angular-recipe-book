@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col-xs-10">
-    <app-shopping-list-edit></app-shopping-list-edit>
+    <app-shopping-list-edit (ingredient)="onAddIngredient($event)" [currentIngredient]="currentIngredient" (ingredientToRemove)="onRemoveIngredient($event)"></app-shopping-list-edit>
     <hr />
     <ul class="list-group">
-      <a class="list-group-item" style="cursor: pointer" *ngFor="let ing of ingredients">
+      <a class="list-group-item" style="cursor: pointer" *ngFor="let ing of ingredients" (click)="onSelectIngredient(ing)">
         {{ing.name}} ({{ing.amount}})
       </a>
     </ul>
