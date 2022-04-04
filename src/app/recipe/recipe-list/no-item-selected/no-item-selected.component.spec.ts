@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecipeListComponent } from './recipe-list.component';
+import { NoItemSelectedComponent } from './no-item-selected.component';
 
-describe('RecipeListComponent', () => {
-  let component: RecipeListComponent;
-  let fixture: ComponentFixture<RecipeListComponent>;
+describe('NoItemSelectedComponent', () => {
+  let component: NoItemSelectedComponent;
+  let fixture: ComponentFixture<NoItemSelectedComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RecipeListComponent ]
+      declarations: [ NoItemSelectedComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RecipeListComponent);
+    fixture = TestBed.createComponent(NoItemSelectedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

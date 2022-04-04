@@ -9,9 +9,4 @@ import {ShoppingListService} from "./shopping-list/services/shopping-list.servic
 })
 export class AppComponent {
   title = 'recipe-book';
-  navigateTo: string = 'recipes';
-
-  onPathReceived(path: string){
-    this.navigateTo = path;
-  }
 }

@@ -20,8 +20,8 @@
       </button>
       <ul class="dropdown-menu">
         <li><a (click)="onSendToList()" style="cursor: pointer">Add to shopping list</a></li>
-        <li><a href="#">Edit recipe</a></li>
-        <li><a href="#">Delete the recipe</a></li>
+        <li><a style="cursor: pointer" (click)="onEditClick()">Edit recipe</a></li>
+        <li><a style="cursor: pointer">Delete the recipe</a></li>
       </ul>
     </div>
   </div>
@@ -38,3 +38,4 @@
     </ul>
   </div>
 </div>
+<router-outlet></router-outlet>
