@@ -10,5 +10,4 @@ export class DropdownDirective {
   @HostListener('click') toggleDropdown(){
     this.dropdownState = !this.dropdownState;
   }
-
 }
