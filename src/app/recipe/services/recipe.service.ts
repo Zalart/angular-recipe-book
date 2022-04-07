@@ -1,11 +1,10 @@
-import {EventEmitter} from "@angular/core";
-
 import {Recipe} from "../recipe.model";
 import {Ingredient} from "../../shopping-list/ingredient.model";
+import {Subject} from "rxjs";
 
 
 export class RecipeService {
-  currentRecipe = new EventEmitter<Recipe>();
+  // public currentRecipe = new Subject<Recipe>();
   private recipes: Recipe[] = [
     new Recipe(
       0,
