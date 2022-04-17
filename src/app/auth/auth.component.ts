@@ -1,27 +1,31 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
+import {Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild} from "@angular/core";
 import {NgForm} from "@angular/forms";
 import {AuthService} from "./auth.service";
 import {Router} from "@angular/router";
-import {User} from "./user.model";
+/*import {User} from "./user.model";*/
 import {Observable, Subscription} from "rxjs";
 import {IAuthResponse} from "./auth.types";
+import {AlertComponent} from "../shared/alert/alert.component";
+import {PlaceholderDirective} from "../shared/placeholder/placeholder.directive";
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html'
 })
-export class AuthComponent implements OnInit, OnDestroy {
+export class AuthComponent implements OnDestroy {
   public isLoginMode = true;
   public isLoading = false;
   public error: string = null;
-  public user: User;
-  private userSub: Subscription;
+  // public user: User;
+  // private userSub: Subscription;
+  @ViewChild(PlaceholderDirective, {static: false}) alertHost: PlaceholderDirective;
+  private closeSub: Subscription;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router/*, private componentFactoryResolver: ComponentFactoryResolver*/) {
   }
-  ngOnInit() {
-    this.userSub = this.authService.user.subscribe((user)=> this.user = user);
-  }
+  // ngOnInit() {
+  //   this.userSub = this.authService.user.subscribe((user)=> this.user = user);
+  // }
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -46,6 +50,7 @@ export class AuthComponent implements OnInit, OnDestroy {
         console.log(errorResponse);
         this.isLoading = false;
         this.error = errorResponse;
+        this.showErrorAlert(errorResponse);
       },
       complete: () => {
         console.log('completed');
@@ -56,9 +61,27 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.userSub.unsubscribe();
+    // this.userSub.unsubscribe();
+    if (this.closeSub) {
+      this.closeSub.unsubscribe();
+    }
   }
-  onCloseClicked(){
-    this.error = null;
+
+
+  // onCloseClicked(){
+  //   this.error = null;
+  // }
+
+  private showErrorAlert(message: string) {
+    // const alertComponentFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
+    const hostViewContainerRef = this.alertHost.viewContainerRef;
+    hostViewContainerRef.clear();
+
+    const componentRef = hostViewContainerRef.createComponent(AlertComponent);
+    componentRef.instance.message = message;
+    this.closeSub = componentRef.instance.onClose.subscribe(()=> {
+      this.closeSub.unsubscribe();
+    hostViewContainerRef.clear();
+    })
   }
 }
